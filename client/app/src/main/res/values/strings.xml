@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ArkadiuszApp001</string>
+    <string name="camera">camera</string>
+    <string name="album">albums</string>
+    <string name="albumsnew">albums new</string>
+    <string name="notes">Notes</string>
+    <string name="collage">collage</string>
+    <string name="network">network</string>
+    <string name="inner_album_title">Album</string>
+</resources>
