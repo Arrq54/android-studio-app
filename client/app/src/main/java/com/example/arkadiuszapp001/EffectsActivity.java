@@ -10,9 +10,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -31,7 +34,8 @@ public class EffectsActivity extends AppCompatActivity {
 
     private ImageView iv;
     private HorizontalScrollView hsv;
-
+    private RelativeLayout overlay;
+    private TextView overlayText;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,10 @@ public class EffectsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_effects);
 
         iv = findViewById(R.id.imageViewEffects);
+
+        overlay = findViewById(R.id.overlay);
+        overlayText = findViewById(R.id.overlayText);
+
 
         ImageView settings = findViewById(R.id.settings);
         settings.setOnClickListener(v->{
@@ -48,7 +56,6 @@ public class EffectsActivity extends AppCompatActivity {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bmp2.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
-
 
 
 
@@ -199,8 +206,42 @@ public class EffectsActivity extends AppCompatActivity {
             ll.addView(ivFilter);
 //            ll.addView(tv);
 
+            int finalI = i;
             ll.setOnClickListener(v->{
                 iv.setImageBitmap(copy);
+
+                String s="";
+                switch(finalI){
+                    case 0:
+                        s="No effect";
+                        break;
+                    case 1:
+                        s="Red";
+                        break;
+                    case 2:
+                        s="Negative";
+                        break;
+                    case 3:
+                        s="Grayscale";
+                        break;
+                    case 4:
+                        s="Green/Violet";
+                        break;
+                    case 5:
+                        s="Red/Violet";
+                        break;
+                    case 6:
+                        s="Lime green";
+                        break;
+                    case 7:
+                        s="Cyan";
+                        break;
+                    default:break;
+                }
+                overlayText.setText(s);
+
+
+                overlay.animate().alpha(0.95f).withEndAction(()->{overlay.animate().alpha(0).withEndAction(()->{}).setInterpolator(new AccelerateInterpolator()).setDuration(1000).start();}).setInterpolator(new AccelerateInterpolator()).setDuration(1000).start();
             });
 
             ll.setOrientation(LinearLayout.VERTICAL);

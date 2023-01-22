@@ -7,4 +7,5 @@
     <string name="collage">collage</string>
     <string name="network">network</string>
     <string name="inner_album_title">Album</string>
+    <string name="overlay">Overlay</string>
 </resources>
