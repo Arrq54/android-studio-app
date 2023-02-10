@@ -1,17 +1,17 @@
 package com.example.arkadiuszapp001;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -77,7 +77,7 @@ public class NetworkActivity extends AppCompatActivity {
                 error -> {
 
                     Log.d("xxx", "error: " + error.getMessage());
-                    Toast.makeText(NetworkActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NetworkActivity.this, ""+error.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
         );

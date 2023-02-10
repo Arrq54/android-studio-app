@@ -6,7 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -16,6 +16,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        Log.d("xxxxx","CREATE TABLE IF NOT EXISTS");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS notesPhotos (id INTEGER PRIMARY KEY AUTOINCREMENT, color TEXT, title TEXT, noteContent TEXT, photopath TEXT)");
     }
 
@@ -30,8 +31,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public boolean insertNote(String color, String title, String noteContent, String photopath){
 
+        Log.d("xxxxx","INSERT");
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("CREATE TABLE IF NOT EXISTS notesPhotos (id INTEGER PRIMARY KEY,color TEXT, title TEXT, noteContent TEXT, photopath TEXT)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS notesPhotos (id INTEGER PRIMARY KEY AUTOINCREMENT, color TEXT, title TEXT, noteContent TEXT, photopath TEXT)");
         ContentValues contentValues = new ContentValues();
         contentValues.put("color", color);
         contentValues.put("title", title);
@@ -79,7 +81,24 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Note> notes = new ArrayList<>();
         Cursor result = db.rawQuery("SELECT * FROM notesPhotos" , null);
+
+
+
+
         while(result.moveToNext()){
+
+
+
+//            notes.add( new Note(
+//                    1,
+//                    Integer.toHexString(0xffff5100) ,
+//                   "aaa",
+//                    "dd",
+//                    "ee"
+//
+//            ));
+
+
             notes.add( new Note(
                     result.getInt(result.getColumnIndex("id")),
                     result.getString(result.getColumnIndex("color")),

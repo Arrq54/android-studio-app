@@ -60,6 +60,7 @@ public class EffectsActivity extends AppCompatActivity {
 
 
 
+
             String ip = "192.168.0.1";
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(EffectsActivity.this);
             if (preferences.getString("ip", null) != null){
