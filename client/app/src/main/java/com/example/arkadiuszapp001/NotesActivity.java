@@ -1,16 +1,9 @@
 package com.example.arkadiuszapp001;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +27,7 @@ public class NotesActivity extends AppCompatActivity {
     protected void refresh(){
         DatabaseManager db = new DatabaseManager (
                 NotesActivity.this, // activity z galerią zdjęć
-                "NotatkiWojdylaArkadiusz.db", // nazwa bazy
+                "NotatkiWojdylaArkadiusz2.db", // nazwa bazy
                 null,
                 1 //wersja bazy, po zmianie schematu bazy należy ją zwiększyć
         );
@@ -111,7 +109,7 @@ public class NotesActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     DatabaseManager db = new DatabaseManager (
                                             NotesActivity.this, // activity z galerią zdjęć
-                                            "NotatkiWojdylaArkadiusz.db", // nazwa bazy
+                                            "NotatkiWojdylaArkadiusz2.db", // nazwa bazy
                                             null,
                                             1 //wersja bazy, po zmianie schematu bazy należy ją zwiększyć
                                     );
@@ -130,7 +128,7 @@ public class NotesActivity extends AppCompatActivity {
                         else if(opcje[which]=="usun"){
                             DatabaseManager db = new DatabaseManager (
                                     NotesActivity.this,
-                                    "NotatkiWojdylaArkadiusz.db",
+                                    "NotatkiWojdylaArkadiusz2.db",
                                     null,
                                     1
                             );

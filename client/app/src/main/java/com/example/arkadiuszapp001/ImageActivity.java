@@ -13,7 +13,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +25,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -84,20 +84,20 @@ public class ImageActivity extends AppCompatActivity {
 
 
 
-//        a.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(!x[0]){
-//                    RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
-//                    a.setLayoutParams(lp2);
-//                    x[0] =true;
-//                }else{
-//                    RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-//                    a.setLayoutParams(lp2);
-//                    x[0] =false;
-//                }
-//            }
-//        });
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!x[0]){
+                    RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                    a.setLayoutParams(lp2);
+                    x[0] =true;
+                }else{
+                    RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+                    a.setLayoutParams(lp2);
+                    x[0] =false;
+                }
+            }
+        });
 
         ImageView settings = findViewById(R.id.settings);
         settings.setOnClickListener(v->{
@@ -212,23 +212,23 @@ public class ImageActivity extends AppCompatActivity {
 
         //RYSOWANIE
 
-        RelativeLayout parent = findViewById(R.id.parentLayout);
-
-
-        int iW=a.getDrawable().getIntrinsicWidth();//original width of underlying image
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels;
-
-
-
-
-        MyImageView myImg = new MyImageView(this, ((BitmapDrawable) a.getDrawable()).getBitmap().getScaledWidth(displayMetrics),200);
-        parent.addView(myImg );
-        myImg.setX(100);
-        myImg.setY(100);
-        myImg.repaintAll();
+//        RelativeLayout parent = findViewById(R.id.parentLayout);
+//
+//
+//        int iW=a.getDrawable().getIntrinsicWidth();//original width of underlying image
+//
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int width = displayMetrics.widthPixels;
+//
+//
+//
+//
+//        MyImageView myImg = new MyImageView(this, ((BitmapDrawable) a.getDrawable()).getBitmap().getScaledWidth(displayMetrics),200);
+//        parent.addView(myImg );
+//        myImg.setX(100);
+//        myImg.setY(100);
+//        myImg.repaintAll();
 
 
         ///

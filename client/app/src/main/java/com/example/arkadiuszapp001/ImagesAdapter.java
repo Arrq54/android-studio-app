@@ -1,13 +1,11 @@
 package com.example.arkadiuszapp001;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-//import com.amitshekhar.DebugDB;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -147,7 +141,7 @@ public class ImagesAdapter extends ArrayAdapter {
 
                         DatabaseManager db = new DatabaseManager (
                                 _context, // activity z galerią zdjęć
-                                "NotatkiWojdylaArkadiusz.db", // nazwa bazy
+                                "NotatkiWojdylaArkadiusz2.db", // nazwa bazy
                                 null,
                                 1 //wersja bazy, po zmianie schematu bazy należy ją zwiększyć
                         );

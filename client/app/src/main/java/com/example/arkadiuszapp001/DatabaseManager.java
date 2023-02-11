@@ -17,6 +17,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         Log.d("xxxxx","CREATE TABLE IF NOT EXISTS");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS notesPhotos");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS notesPhotos (id INTEGER PRIMARY KEY AUTOINCREMENT, color TEXT, title TEXT, noteContent TEXT, photopath TEXT)");
     }
 
@@ -33,6 +34,15 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         Log.d("xxxxx","INSERT");
         SQLiteDatabase db = this.getWritableDatabase();
+//        db.execSQL("DROP TABLE notesPhotos");
+        Cursor result = db.rawQuery("SELECT * FROM notesPhotos" , null);
+
+        if(result.getCount()==0){
+            db.execSQL("DROP TABLE notesPhotos");
+        }
+
+
+
         db.execSQL("CREATE TABLE IF NOT EXISTS notesPhotos (id INTEGER PRIMARY KEY AUTOINCREMENT, color TEXT, title TEXT, noteContent TEXT, photopath TEXT)");
         ContentValues contentValues = new ContentValues();
         contentValues.put("color", color);
@@ -48,6 +58,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public boolean editNote(int id, String color, String title, String noteContent, String photopath){
 
         SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("CREATE TABLE IF NOT EXISTS notesPhotos (id INTEGER PRIMARY KEY AUTOINCREMENT, color TEXT, title TEXT, noteContent TEXT, photopath TEXT)");
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("color", color);
@@ -67,6 +78,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS notesPhotos (id INTEGER PRIMARY KEY AUTOINCREMENT, color TEXT, title TEXT, noteContent TEXT, photopath TEXT)");
         db.delete("notesPhotos",
                 "id = ? ",
                 new String[]{String.valueOf(id)});
@@ -79,6 +91,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @SuppressLint("Range")
     public ArrayList<Note> getAll(){
         SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("CREATE TABLE IF NOT EXISTS notesPhotos (id INTEGER PRIMARY KEY AUTOINCREMENT, color TEXT, title TEXT, noteContent TEXT, photopath TEXT)");
         ArrayList<Note> notes = new ArrayList<>();
         Cursor result = db.rawQuery("SELECT * FROM notesPhotos" , null);
 
@@ -92,15 +105,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
 //            notes.add( new Note(
 //                    1,
 //                    Integer.toHexString(0xffff5100) ,
-//                   "aaa",
-//                    "dd",
-//                    "ee"
+//                   "chu",
+//                    "chuuuj",
+//                    "chhhchuuuj"
 //
 //            ));
 
 
             notes.add( new Note(
                     result.getInt(result.getColumnIndex("id")),
+//                    1,
                     result.getString(result.getColumnIndex("color")),
                     result.getString(result.getColumnIndex("title")),
                     result.getString(result.getColumnIndex("noteContent")),

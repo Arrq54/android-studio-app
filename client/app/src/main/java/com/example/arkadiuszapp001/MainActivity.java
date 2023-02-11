@@ -55,28 +55,30 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout notes;
     private AlertDialog folderDialog;
 
-    public void checkPermission(String permission, int requestCode) {
-        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
-        } else {
-            if(permission == Manifest.permission.WRITE_EXTERNAL_STORAGE){
-                Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
-                File pic = Environment.getExternalStoragePublicDirectory( Environment.DIRECTORY_PICTURES );
-                File dir = new File(pic, "ArkadiuszWojdyla");
-                dir.mkdir();
+    private String[] permissions = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_NETWORK_STATE
+    } ;
 
-                File folder = new File(Environment.getExternalStoragePublicDirectory( Environment.DIRECTORY_PICTURES ) + File.separator + "ArkadiuszWojdyla");
-                File miejsca = new File(folder, "miejsca");
-                miejsca.mkdir();
-
-                File ludzie = new File(folder, "ludzie");
-                ludzie.mkdir();
-
-                File rzeczy = new File(folder, "rzeczy");
-                rzeczy.mkdir();
-            }
-
-
+    public void checkPermissions(String[] permission, int requestCode){
+        boolean allPermisions = true;
+        for(String p: permissions){if (ContextCompat.checkSelfPermission(MainActivity.this, p) == PackageManager.PERMISSION_DENIED) {allPermisions = false;}}
+        if(allPermisions==false){
+            ActivityCompat.requestPermissions(MainActivity.this, permissions, requestCode);
+        }else{
+            File pic = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            File dir = new File(pic, "ArkadiuszWojdyla");
+            dir.mkdir();
+            File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator + "ArkadiuszWojdyla");
+            File miejsca = new File(folder, "miejsca");
+            File ludzie = new File(folder, "ludzie");
+            File rzeczy = new File(folder, "rzeczy");
+            miejsca.mkdir();
+            ludzie.mkdir();
+            rzeczy.mkdir();
         }
     }
 
@@ -117,11 +119,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 100);
-
-        checkPermission(Manifest.permission.CAMERA, 100);
-
-//        Log.d("xxx", DebugDB.getAddressLog());
+        checkPermissions(permissions,100);
         camera = findViewById(R.id.camera);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,12 +135,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (intent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(intent, 200); // 200 - stała wartość, która później posłuży do identyfikacji tej akcji
+                        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+                            Toast.makeText(MainActivity.this, "NO CAMERA PERMISSION!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            if (intent.resolveActivity(getPackageManager()) != null) {
+                                startActivityForResult(intent, 200); // 200 - stała wartość, która później posłuży do identyfikacji tej akcji
+                            }
                         }
+
+
                     }
 
                 });
@@ -252,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 error -> {
 
                     Log.d("xxx", "error: " + error.getMessage());
-                    Toast.makeText(MainActivity.this, ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this, ""+error.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
         );
